@@ -62,7 +62,6 @@
         </nav>
 
         <div class="nav-actions">
-          <button class="nav-link-btn" aria-label="Saved properties">Saved</button>
           <a class="nav-link-btn" href="admin.html">Admin portal</a>
           <a class="primary-btn small" href="admin.html#add-property">List Your Property</a>
         </div>
@@ -97,15 +96,15 @@
               <button class="tab" data-tab="sell" role="tab" aria-selected="false">Sell</button>
             </div>
 
-            <form class="search-form">
+            <form class="search-form search-form-panel active" data-search-mode="buy">
               <label>
                 <span>Location</span>
-                <input type="text" placeholder="City, neighborhood, or ZIP" />
+                <input type="text" name="location" placeholder="City, neighborhood, or ZIP" />
               </label>
 
               <label>
-                <span>Type</span>
-                <select>
+                <span>Property type</span>
+                <select name="propertyType">
                   <option>Home</option>
                   <option>Apartment</option>
                   <option>Townhome</option>
@@ -115,8 +114,8 @@
               </label>
 
               <label>
-                <span>Price</span>
-                <select>
+                <span>Budget</span>
+                <select name="budget">
                   <option>GH₵ 500k - GH₵ 1M</option>
                   <option>GH₵ 1M - GH₵ 2M</option>
                   <option>GH₵ 2M - GH₵ 5M</option>
@@ -126,7 +125,7 @@
 
               <label>
                 <span>Bedrooms</span>
-                <select>
+                <select name="bedrooms">
                   <option>Any</option>
                   <option>1+</option>
                   <option>2+</option>
@@ -135,7 +134,87 @@
                 </select>
               </label>
 
-              <button type="submit" class="primary-btn search-btn">Search</button>
+              <button type="submit" class="primary-btn search-btn">Search homes</button>
+            </form>
+
+            <form class="search-form search-form-panel" data-search-mode="rent" hidden>
+              <label>
+                <span>Location</span>
+                <input type="text" name="location" placeholder="Area or neighborhood" />
+              </label>
+
+              <label>
+                <span>Property type</span>
+                <select name="propertyType">
+                  <option>Apartment</option>
+                  <option>Home</option>
+                  <option>Townhome</option>
+                  <option>Villa</option>
+                  <option>Condo</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Monthly budget</span>
+                <select name="budget">
+                  <option>GH₵ 1k - GH₵ 2k</option>
+                  <option>GH₵ 2k - GH₵ 4k</option>
+                  <option>GH₵ 4k - GH₵ 7k</option>
+                  <option>GH₵ 7k+</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Move-in</span>
+                <select name="moveIn">
+                  <option>Immediately</option>
+                  <option>Within 1 month</option>
+                  <option>Within 2 months</option>
+                  <option>Flexible</option>
+                </select>
+              </label>
+
+              <button type="submit" class="primary-btn search-btn">Find rentals</button>
+            </form>
+
+            <form class="search-form search-form-panel" data-search-mode="sell" hidden>
+              <label>
+                <span>Location</span>
+                <input type="text" name="location" placeholder="Your property location" />
+              </label>
+
+              <label>
+                <span>Property type</span>
+                <select name="propertyType">
+                  <option>Home</option>
+                  <option>Apartment</option>
+                  <option>Townhome</option>
+                  <option>Villa</option>
+                  <option>Condo</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Estimated value</span>
+                <select name="budget">
+                  <option>GH₵ 500k - GH₵ 1M</option>
+                  <option>GH₵ 1M - GH₵ 2M</option>
+                  <option>GH₵ 2M - GH₵ 5M</option>
+                  <option>GH₵ 5M+</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Timing</span>
+                <select name="timeline">
+                  <option>ASAP</option>
+                  <option>Within 30 days</option>
+                  <option>Within 60 days</option>
+                  <option>Flexible</option>
+                </select>
+              </label>
+
+              <button type="submit" class="primary-btn search-btn">Get valuation</button>
             </form>
           </div>
         </div>
@@ -280,29 +359,117 @@
                       </label>
                     </div>
 
+                    <div class="purchase-form-grid">
+                      <label>
+                        <span>Payment method</span>
+                        <select name="paymentMethod" class="payment-method">
+                          <option value="Card payment">Card payment</option>
+                          <option value="Bank transfer">Bank transfer</option>
+                          <option value="Mobile money">Mobile money</option>
+                          <option value="Cash payment">Cash payment</option>
+                          <option value="Mortgage / financing">Mortgage / financing</option>
+                        </select>
+                      </label>
+                      <label>
+                        <span>Deposit amount</span>
+                        <input type="number" name="depositAmount" class="payment-amount" min="1" value="1" required />
+                      </label>
+                    </div>
+
                     <div class="payment-summary">
                       <span>Property price</span>
                       <strong class="checkout-price">GH₵ 0</strong>
                     </div>
 
-                    <label>
-                      <span>Deposit amount</span>
-                      <input type="number" name="depositAmount" class="payment-amount" min="1" value="1" required />
-                    </label>
-
-                    <div class="card-box">
-                      <label>
-                        <span>Card number</span>
-                        <input type="text" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" required />
-                      </label>
-                      <div class="card-row">
+                    <div class="payment-method-details">
+                      <div class="method-box method-card active">
                         <label>
-                          <span>Expiry</span>
-                          <input type="text" name="cardExpiry" placeholder="MM/YY" maxlength="5" required />
+                          <span>Card number</span>
+                          <input type="text" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" required />
+                        </label>
+                        <div class="card-row">
+                          <label>
+                            <span>Expiry</span>
+                            <input type="text" name="cardExpiry" placeholder="MM/YY" maxlength="5" required />
+                          </label>
+                          <label>
+                            <span>CVV</span>
+                            <input type="text" name="cardCvv" placeholder="123" maxlength="4" inputmode="numeric" required />
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="method-box method-bank-transfer" hidden>
+                        <label>
+                          <span>Bank name</span>
+                          <input type="text" name="bankName" placeholder="e.g. Ecobank Ghana" />
                         </label>
                         <label>
-                          <span>CVV</span>
-                          <input type="text" name="cardCvv" placeholder="123" maxlength="4" inputmode="numeric" required />
+                          <span>Reference / account name</span>
+                          <input type="text" name="bankReference" placeholder="Your name or payment reference" />
+                        </label>
+                      </div>
+
+                      <div class="method-box method-mobile-money" hidden>
+                        <label>
+                          <span>Mobile money number</span>
+                          <input type="tel" name="mobileMoneyNumber" placeholder="+233 24 000 0000" />
+                        </label>
+
+                        <div class="network-picker">
+                          <span class="network-picker-label">Network</span>
+                          <div class="network-options">
+                            <button type="button" class="mobile-network-option active" data-network="MTN">
+                              <span class="network-logo network-mtn" aria-hidden="true">
+                                <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+                                  <circle cx="20" cy="20" r="18" fill="#f4c542"/>
+                                  <path d="M13 26V14h4.1l4.7 7.2 4.7-7.2H30v12h-3.5V18.5l-4.7 7.2h-.4l-4.7-7.2V26H13Z" fill="#1d1d1d"/>
+                                </svg>
+                              </span>
+                              <span>MTN</span>
+                            </button>
+                            <button type="button" class="mobile-network-option" data-network="Vodafone Cash">
+                              <span class="network-logo network-vodafone" aria-hidden="true">
+                                <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+                                  <circle cx="20" cy="20" r="18" fill="#e4002b"/>
+                                  <path d="M13 26.8 18.2 13h3.7l4.7 9.3 2.3-9.3h3.2l-4.2 18.1h-3.7L20 20.9 16.3 26.8H13Z" fill="#ffffff"/>
+                                </svg>
+                              </span>
+                              <span>Vodafone Cash</span>
+                            </button>
+                            <button type="button" class="mobile-network-option" data-network="AirtelTigo Money">
+                              <span class="network-logo network-airtel" aria-hidden="true">
+                                <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+                                  <circle cx="20" cy="20" r="18" fill="#f97316"/>
+                                  <path d="M12 14.5h16v3.2H23.2v9.8h-6.4v-9.8H12v-3.2Zm7.8 8.5h2.4v-5.2h-2.4v5.2Z" fill="#fff7ed"/>
+                                </svg>
+                              </span>
+                              <span>AirtelTigo Money</span>
+                            </button>
+                          </div>
+                          <select name="mobileMoneyNetwork" class="mobile-money-hidden-select" aria-label="Select mobile money network">
+                            <option selected>MTN</option>
+                            <option>Vodafone Cash</option>
+                            <option>AirtelTigo Money</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="method-box method-cash" hidden>
+                        <label>
+                          <span>Preferred cash schedule</span>
+                          <input type="text" name="cashSchedule" placeholder="e.g. 3 installments over 6 months" />
+                        </label>
+                      </div>
+
+                      <div class="method-box method-financing" hidden>
+                        <label>
+                          <span>Financing partner / lender</span>
+                          <input type="text" name="financingPartner" placeholder="e.g. Bank, mortgage provider" />
+                        </label>
+                        <label>
+                          <span>Estimated loan coverage</span>
+                          <input type="text" name="financingCoverage" placeholder="e.g. 60% of property price" />
                         </label>
                       </div>
                     </div>

@@ -509,11 +509,55 @@ let galleryState = {
   index: 0
 };
 
+function updatePurchasePlanOptions(property) {
+  const purchaseForm = document.getElementById('purchase-form');
+  if (!purchaseForm) return;
+
+  const paymentPlan = purchaseForm.querySelector('.payment-plan');
+  const paymentMethod = purchaseForm.querySelector('.payment-method');
+
+  if (!paymentPlan || !paymentMethod) return;
+
+  const isRent = property.status === 'For Rent';
+  const planOptions = isRent
+    ? [
+        { value: 'Monthly rent', label: 'Monthly rent' },
+        { value: 'Quarterly rent', label: 'Quarterly rent' },
+        { value: 'Annual upfront', label: 'Annual upfront payment' },
+        { value: 'Security deposit + rent', label: 'Security deposit + rent' }
+      ]
+    : [
+        { value: 'Full payment', label: 'Full payment' },
+        { value: '25% deposit', label: '25% deposit' },
+        { value: 'Installment plan', label: 'Installment plan' },
+        { value: 'Mortgage / financing', label: 'Mortgage / financing' }
+      ];
+
+  const methodOptions = isRent
+    ? [
+        { value: 'Card payment', label: 'Card payment' },
+        { value: 'Bank transfer', label: 'Bank transfer' },
+        { value: 'Mobile money', label: 'Mobile money' },
+        { value: 'Cash payment', label: 'Cash payment' }
+      ]
+    : [
+        { value: 'Card payment', label: 'Card payment' },
+        { value: 'Bank transfer', label: 'Bank transfer' },
+        { value: 'Mobile money', label: 'Mobile money' },
+        { value: 'Cash payment', label: 'Cash payment' },
+        { value: 'Mortgage / financing', label: 'Mortgage / financing' }
+      ];
+
+  paymentPlan.innerHTML = planOptions.map((option) => `<option value="${option.value}">${option.label}</option>`).join('');
+  paymentMethod.innerHTML = methodOptions.map((option) => `<option value="${option.value}">${option.label}</option>`).join('');
+}
+
 function updatePurchaseForm(property) {
   const purchaseForm = document.getElementById('purchase-form');
   if (!purchaseForm) return;
 
   purchaseForm.dataset.propertyId = property.id;
+  updatePurchasePlanOptions(property);
 
   const checkoutPrice = purchaseForm.querySelector('.checkout-price');
   const paymentAmount = purchaseForm.querySelector('.payment-amount');
@@ -838,8 +882,12 @@ if (hero) {
 }
 
 const tabs = document.querySelectorAll('.tab');
+const searchPanels = document.querySelectorAll('.search-form-panel');
+
 tabs.forEach((tab) => {
   tab.addEventListener('click', () => {
+    const mode = tab.dataset.tab;
+
     tabs.forEach((item) => {
       item.classList.remove('active');
       item.setAttribute('aria-selected', 'false');
@@ -847,8 +895,31 @@ tabs.forEach((tab) => {
 
     tab.classList.add('active');
     tab.setAttribute('aria-selected', 'true');
+
+    searchPanels.forEach((panel) => {
+      const isActive = panel.dataset.searchMode === mode;
+      panel.classList.toggle('active', isActive);
+      panel.hidden = !isActive;
+    });
   });
 });
+
+function isMobileDevice() {
+  return /Android|iPhone|iPad|iPod|Mobile|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent || '');
+}
+
+function openApexContactChannel(message = 'Hello Apex Living, I would like to speak with your team.') {
+  const whatsappNumber = '233209755466';
+  const callNumber = '+233209755466';
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+  if (isMobileDevice()) {
+    window.location.href = `tel:${callNumber}`;
+    return;
+  }
+
+  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+}
 
 function addLeadBooking(form) {
   const name = form.querySelector('input[placeholder="Your name"]')?.value?.trim();
@@ -867,6 +938,7 @@ function addLeadBooking(form) {
   });
   saveState();
   renderAdminDashboard();
+  openApexContactChannel(`Hello Apex Living, my name is ${name}. I would like to request a call.`);
 
   const button = form.querySelector('button[type="submit"]');
   if (button) {
@@ -882,9 +954,10 @@ function addLeadBooking(form) {
 }
 
 function handlePropertySearch(form) {
-  const locationInput = form.querySelector('input[type="text"]');
-  const typeSelect = form.querySelector('select');
-  const priceSelect = form.querySelectorAll('select')[1];
+  const locationInput = form.querySelector('input[name="location"], input[type="text"]');
+  const selects = Array.from(form.querySelectorAll('select'));
+  const typeSelect = selects.find((select) => /property|type/i.test(select.name || '')) || selects[0];
+  const priceSelect = selects.find((select) => /budget|price|rent|value/i.test(select.name || '')) || selects[1] || selects[0];
   const searchText = (locationInput?.value || '').trim().toLowerCase();
   const typeText = (typeSelect?.value || '').toLowerCase();
   const priceText = (priceSelect?.value || '').toLowerCase();
@@ -930,6 +1003,64 @@ function notifyAdminViaWhatsApp(property, buyerName, phone, email, paymentPlan, 
   window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 }
 
+function togglePaymentMethodDetails(form) {
+  const method = form.querySelector('.payment-method')?.value || 'Card payment';
+  const boxes = form.querySelectorAll('.method-box');
+  const methodMap = {
+    'Card payment': 'method-card',
+    'Bank transfer': 'method-bank-transfer',
+    'Mobile money': 'method-mobile-money',
+    'Cash payment': 'method-cash',
+    'Mortgage / financing': 'method-financing'
+  };
+
+  const targetClass = methodMap[method] || 'method-card';
+
+  boxes.forEach((box) => {
+    const shouldShow = box.classList.contains(targetClass);
+    box.hidden = !shouldShow;
+    box.classList.toggle('active', shouldShow);
+  });
+
+  const cardNumber = form.querySelector('input[name="cardNumber"]');
+  const cardExpiry = form.querySelector('input[name="cardExpiry"]');
+  const cardCvv = form.querySelector('input[name="cardCvv"]');
+  const bankName = form.querySelector('input[name="bankName"]');
+  const bankReference = form.querySelector('input[name="bankReference"]');
+  const mobileMoneyNumber = form.querySelector('input[name="mobileMoneyNumber"]');
+  const cashSchedule = form.querySelector('input[name="cashSchedule"]');
+  const financingPartner = form.querySelector('input[name="financingPartner"]');
+
+  const requiredFields = [cardNumber, cardExpiry, cardCvv, bankName, bankReference, mobileMoneyNumber, cashSchedule, financingPartner];
+  requiredFields.forEach((field) => {
+    if (!field) return;
+    field.required = false;
+  });
+
+  if (method === 'Card payment') {
+    cardNumber.required = true;
+    cardExpiry.required = true;
+    cardCvv.required = true;
+  }
+
+  if (method === 'Bank transfer') {
+    bankName.required = true;
+    bankReference.required = true;
+  }
+
+  if (method === 'Mobile money') {
+    mobileMoneyNumber.required = true;
+  }
+
+  if (method === 'Cash payment') {
+    cashSchedule.required = true;
+  }
+
+  if (method === 'Mortgage / financing') {
+    financingPartner.required = true;
+  }
+}
+
 function handlePurchaseSubmission(event) {
   event.preventDefault();
   const form = event.currentTarget;
@@ -945,22 +1076,33 @@ function handlePurchaseSubmission(event) {
     return;
   }
 
+  togglePaymentMethodDetails(form);
+
   const name = form.querySelector('input[name="buyerName"]')?.value.trim();
   const email = form.querySelector('input[name="buyerEmail"]')?.value.trim();
   const phone = form.querySelector('input[name="buyerPhone"]')?.value.trim();
   const paymentPlan = form.querySelector('.payment-plan')?.value;
+  const paymentMethod = form.querySelector('.payment-method')?.value;
   const depositAmount = Number(form.querySelector('.payment-amount')?.value || 0);
   const cardNumber = form.querySelector('input[name="cardNumber"]')?.value.replace(/\s+/g, '');
 
-  if (!name || !email || !phone || cardNumber?.length < 12 || !depositAmount) {
+  if (!name || !email || !phone || !paymentPlan || !paymentMethod || !depositAmount) {
     if (statusText) {
-      statusText.textContent = 'Please complete all payment details before continuing.';
+      statusText.textContent = 'Please complete all buyer and payment details before continuing.';
       statusText.style.color = '#b91c1c';
     }
     return;
   }
 
-  notifyAdminViaWhatsApp(property, name, phone, email, paymentPlan, depositAmount);
+  if (paymentMethod === 'Card payment' && cardNumber?.length < 12) {
+    if (statusText) {
+      statusText.textContent = 'Please complete the card payment details before continuing.';
+      statusText.style.color = '#b91c1c';
+    }
+    return;
+  }
+
+  notifyAdminViaWhatsApp(property, name, phone, email, `${paymentPlan} via ${paymentMethod}`, depositAmount);
 
   appState.bookings.unshift({
     name,
@@ -982,6 +1124,8 @@ function handlePurchaseSubmission(event) {
     return;
   }
 
+  openApexContactChannel(`Hello Apex Living, I would like to continue with my property request for ${property.title}.`);
+
   if (statusText) {
     statusText.textContent = `Demo payment success: ${name}, your reservation for ${property.title} has been noted. Add a Stripe Payment Link to enable real online payments.`;
     statusText.style.color = '#166534';
@@ -992,6 +1136,27 @@ function handlePurchaseSubmission(event) {
     submitButton.textContent = 'Ready for Stripe';
     submitButton.disabled = true;
   }
+}
+
+const purchaseForm = document.getElementById('purchase-form');
+if (purchaseForm) {
+  const paymentMethodSelect = purchaseForm.querySelector('.payment-method');
+  if (paymentMethodSelect) {
+    paymentMethodSelect.addEventListener('change', () => togglePaymentMethodDetails(purchaseForm));
+  }
+
+  const mobileNetworkButtons = purchaseForm.querySelectorAll('.mobile-network-option');
+  const mobileNetworkSelect = purchaseForm.querySelector('.mobile-money-hidden-select');
+  mobileNetworkButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      mobileNetworkButtons.forEach((item) => item.classList.toggle('active', item === button));
+      if (mobileNetworkSelect) {
+        mobileNetworkSelect.value = button.dataset.network || button.textContent.trim();
+      }
+    });
+  });
+
+  togglePaymentMethodDetails(purchaseForm);
 }
 
 const forms = document.querySelectorAll('form');
