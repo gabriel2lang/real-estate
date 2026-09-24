@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apex Living Admin</title>
+    <meta
+      name="description"
+      content="Admin dashboard for bookings, sold homes, and new property listings."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="admin">
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="Apex Living home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="apex-brand-gradient-admin" x1="0%" x2="100%" y1="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f4dfb8" />
+                  <stop offset="100%" stop-color="#c9a66b" />
+                </linearGradient>
+              </defs>
+              <rect x="5" y="5" width="54" height="54" rx="16" fill="#0f172a" />
+              <path d="M18 35L32 20L46 35" fill="none" stroke="url(#apex-brand-gradient-admin)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 32V46H42V32" fill="none" stroke="url(#apex-brand-gradient-admin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M28 46V34H36V46" fill="none" stroke="url(#apex-brand-gradient-admin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>Apex Living</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Admin navigation">
+          <a href="index.html">Website</a>
+          <a href="#overview">Overview</a>
+          <a href="#bookings">Bookings</a>
+          <a href="#sold-homes">Sold Houses</a>
+          <a href="#add-property">Add Listing</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="index.html" class="nav-link-btn">Back to Site</a>
+          <button class="primary-btn small" type="button">Admin Access</button>
+        </div>
+      </div>
+    </header>
+
+    <section id="admin-login-screen" class="admin-login-screen" aria-label="Admin login">
+      <div class="admin-login-card">
+        <p class="eyebrow accent">Secure access</p>
+        <h1>Admin portal</h1>
+        <form id="admin-login-form" class="admin-login-form">
+          <label>
+            <span>Username</span>
+            <div class="username-input-wrap">
+              <input type="password" id="admin-username" name="username" placeholder="Enter username" required />
+              <button type="button" class="field-toggle username-toggle" aria-label="Show username" aria-pressed="false" title="Show username">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M1.5 12s3.7-6 10.5-6 10.5 6 10.5 6-3.7 6-10.5 6S1.5 12 1.5 12Zm10.5 3.25A3.25 3.25 0 1 0 12 8.5a3.25 3.25 0 0 0 0 6.75Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </label>
+          <label class="password-field">
+            <span>Password</span>
+            <div class="password-input-wrap">
+              <input type="password" id="admin-password" name="password" placeholder="Enter password" required />
+              <button type="button" class="field-toggle password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M1.5 12s3.7-6 10.5-6 10.5 6 10.5 6-3.7 6-10.5 6S1.5 12 1.5 12Zm10.5 3.25A3.25 3.25 0 1 0 12 8.5a3.25 3.25 0 0 0 0 6.75Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </label>
+          <button type="submit" class="primary-btn">Access dashboard</button>
+          <a href="index.html" class="secondary-btn small-btn" style="text-align: center; text-decoration: none;">View website</a>
+          <button type="button" id="forgot-password-trigger" class="link-button">Forgot password?</button>
+          <div id="forgot-password-panel" class="forgot-password-panel" hidden>
+            <div class="reset-contact-step">
+              <label>
+                <span>WhatsApp or email</span>
+                <input type="text" id="reset-contact" placeholder="Enter your WhatsApp number or email" />
+              </label>
+              <button type="button" id="send-reset-code" class="secondary-btn small-btn">Send code</button>
+            </div>
+            <div id="reset-code-box" class="reset-code-box" hidden>
+              <label>
+                <span>Verification code</span>
+                <input type="text" id="reset-code-input" placeholder="Enter the 6-digit code" />
+              </label>
+              <button type="button" id="verify-reset-code" class="primary-btn small-btn">Verify code</button>
+            </div>
+            <p id="reset-status" class="reset-status" aria-live="polite" hidden></p>
+          </div>
+          <p id="admin-login-error" class="admin-login-error" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <main class="admin-page" id="admin-dashboard" hidden>
+      <div class="container admin-shell">
+        <aside class="admin-sidebar">
+          <div class="admin-brand-block">
+            <p class="eyebrow accent">Control center</p>
+            <h1>Property admin</h1>
+          </div>
+
+          <nav class="admin-nav" aria-label="Dashboard sections">
+            <button type="button" class="admin-tab active" data-admin-tab="overview">Overview</button>
+            <button type="button" class="admin-tab" data-admin-tab="bookings">Bookings</button>
+            <button type="button" class="admin-tab" data-admin-tab="sold-homes">Sold Houses</button>
+            <button type="button" class="admin-tab" data-admin-tab="add-property">Add Listing</button>
+            <button type="button" class="admin-tab" data-admin-tab="remove-property">Remove Listing</button>
+            <button type="button" class="admin-tab logout-tab" id="logout-admin">Log out</button>
+          </nav>
+        </aside>
+
+        <div class="admin-content">
+          <section id="overview" class="admin-panel active" data-panel="overview">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow accent">Dashboard</p>
+                <h2>Performance overview</h2>
+              </div>
+            </div>
+
+            <div class="stats-grid">
+              <article class="stat-card">
+                <span>Total listings</span>
+                <strong id="stat-listings">0</strong>
+              </article>
+              <article class="stat-card">
+                <span>Bookings</span>
+                <strong id="stat-bookings">0</strong>
+              </article>
+              <article class="stat-card">
+                <span>Sold homes</span>
+                <strong id="stat-sold">0</strong>
+              </article>
+              <article class="stat-card">
+                <span>Active leads</span>
+                <strong id="stat-leads">0</strong>
+              </article>
+            </div>
+
+            <div class="table-card">
+              <div class="table-header">
+                <h3>Recent bookings</h3>
+                <span class="muted-label">Latest client requests</span>
+              </div>
+              <div class="table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Client</th>
+                      <th>Contact</th>
+                      <th>Property</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-bookings-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="bookings" class="admin-panel" data-panel="bookings">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow accent">Bookings</p>
+                <h2>All property bookings</h2>
+              </div>
+            </div>
+
+            <div class="table-card">
+              <div class="table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th>Property</th>
+                      <th>Booking type</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bookings-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="sold-homes" class="admin-panel" data-panel="sold-homes">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow accent">Sales</p>
+                <h2>Sold homes and buyers</h2>
+              </div>
+            </div>
+
+            <div class="table-card">
+              <div class="table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Buyer name</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th>Property</th>
+                      <th>Price</th>
+                      <th>Closed</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sold-homes-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="add-property" class="admin-panel" data-panel="add-property">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow accent">Listings</p>
+                <h2>Add a new property to the website</h2>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <form id="add-property-form" data-form-type="admin-property">
+                <div class="input-grid">
+                  <label>
+                    <span>Property title</span>
+                    <input type="text" name="title" placeholder="Ocean View Residence" required />
+                  </label>
+
+                  <label>
+                    <span>Location</span>
+                    <input type="text" name="location" placeholder="East Legon, Accra" required />
+                  </label>
+
+                  <label>
+                    <span>Status</span>
+                    <select name="status">
+                      <option value="For Sale">For Sale</option>
+                      <option value="For Rent">For Rent</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    <span>Price</span>
+                    <input type="text" name="price" placeholder="GH₵ 1,500,000" required />
+                  </label>
+
+                  <label>
+                    <span>Bedrooms</span>
+                    <input type="number" name="bedrooms" min="1" value="3" required />
+                  </label>
+
+                  <label>
+                    <span>Bathrooms</span>
+                    <input type="number" name="bathrooms" min="1" value="2" required />
+                  </label>
+
+                  <label>
+                    <span>Square footage</span>
+                    <input type="text" name="sqft" placeholder="2,450 Sq Ft" required />
+                  </label>
+
+                  <label>
+                    <span>Image URL</span>
+                    <input
+                      type="url"
+                      name="imageUrl"
+                      placeholder="https://images.unsplash.com/..."
+                    />
+                  </label>
+
+                  <label>
+                    <span>Upload image from your device</span>
+                    <input type="file" name="imageFile" accept="image/*" />
+                  </label>
+                </div>
+
+                <label class="full-width">
+                  <span>Description</span>
+                  <textarea
+                    name="description"
+                    rows="5"
+                    placeholder="Describe the property, its highlights, and why buyers should choose it."
+                    required
+                  ></textarea>
+                </label>
+
+                <div class="form-actions">
+                  <button type="submit" class="primary-btn">Add house to website</button>
+                  <span id="property-form-status" class="form-status" aria-live="polite"></span>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <section id="remove-property" class="admin-panel" data-panel="remove-property">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow accent">Listings</p>
+                <h2>Remove a house from the website</h2>
+              </div>
+            </div>
+
+            <div class="table-card">
+              <div class="table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>House</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="remove-property-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

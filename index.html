@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apex Living | Luxury Real Estate</title>
+    <meta
+      name="description"
+      content="Discover premium homes, rentals, and investment opportunities across Ghana with Apex Living."
+    />
+    <meta name="author" content="Apex Living" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Apex Living | Luxury Real Estate in Ghana" />
+    <meta
+      property="og:description"
+      content="Premium property listings, trusted advisors, and seamless guidance for buying, selling, and renting in Ghana."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.apexliving.com.gh/" />
+    <meta property="og:image" content="https://www.apexliving.com.gh/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Apex Living | Luxury Real Estate in Ghana" />
+    <meta
+      name="twitter:description"
+      content="Premium homes and expert property guidance across Ghana."
+    />
+    <link rel="canonical" href="https://www.apexliving.com.gh/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#" aria-label="Apex Living home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="apex-brand-gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f4dfb8" />
+                  <stop offset="100%" stop-color="#c9a66b" />
+                </linearGradient>
+              </defs>
+              <rect x="5" y="5" width="54" height="54" rx="16" fill="#0f172a" />
+              <path d="M18 35L32 20L46 35" fill="none" stroke="url(#apex-brand-gradient)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 32V46H42V32" fill="none" stroke="url(#apex-brand-gradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M28 46V34H36V46" fill="none" stroke="url(#apex-brand-gradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>Apex Living</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#properties">Properties</a>
+          <a href="#agents">Agents</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="nav-link-btn" aria-label="Saved properties">Saved</button>
+          <a class="nav-link-btn" href="admin.html">Admin portal</a>
+          <a class="primary-btn small" href="admin.html#add-property">List Your Property</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Featured properties slideshow">
+        <div class="hero-overlay"></div>
+        <div class="hero-controls" aria-label="Slideshow controls">
+          <button type="button" class="slide-btn prev-btn" aria-label="Previous slide">←</button>
+          <button type="button" class="slide-btn next-btn" aria-label="Next slide">→</button>
+        </div>
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Premier properties across Ghana.</p>
+            <h1>Find the home that fits your next chapter in Ghana.</h1>
+            <p class="hero-text">
+              From luxury residences in Accra to high-growth homes in Kumasi and Tema, our advisors help
+              buyers, sellers, and renters move with clarity and confidence.
+            </p>
+            <div class="hero-cta-row">
+              <a class="primary-btn" href="#properties">Explore Listings</a>
+              <a class="secondary-btn" href="#consultation">Book a Consultation</a>
+            </div>
+          </div>
+
+          <div class="search-card" aria-label="Search properties">
+            <div class="search-tabs" role="tablist" aria-label="Property search mode">
+              <button class="tab active" data-tab="buy" role="tab" aria-selected="true">Buy</button>
+              <button class="tab" data-tab="rent" role="tab" aria-selected="false">Rent</button>
+              <button class="tab" data-tab="sell" role="tab" aria-selected="false">Sell</button>
+            </div>
+
+            <form class="search-form">
+              <label>
+                <span>Location</span>
+                <input type="text" placeholder="City, neighborhood, or ZIP" />
+              </label>
+
+              <label>
+                <span>Type</span>
+                <select>
+                  <option>Home</option>
+                  <option>Apartment</option>
+                  <option>Townhome</option>
+                  <option>Villa</option>
+                  <option>Condo</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Price</span>
+                <select>
+                  <option>GH₵ 500k - GH₵ 1M</option>
+                  <option>GH₵ 1M - GH₵ 2M</option>
+                  <option>GH₵ 2M - GH₵ 5M</option>
+                  <option>GH₵ 5M+</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Bedrooms</span>
+                <select>
+                  <option>Any</option>
+                  <option>1+</option>
+                  <option>2+</option>
+                  <option>3+</option>
+                  <option>4+</option>
+                </select>
+              </label>
+
+              <button type="submit" class="primary-btn search-btn">Search</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-bar">
+        <div class="container trust-grid">
+          <div><strong>12k+</strong><span>Homes sold</span></div>
+          <div><strong>4.9/5</strong><span>Client rating</span></div>
+          <div><strong>98%</strong><span>Satisfaction</span></div>
+          <div><strong>24/7</strong><span>Market support</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="properties">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow accent">Featured listings</p>
+              <h2>Curated opportunities in Ghana’s most sought-after neighborhoods.</h2>
+            </div>
+            <a href="#" class="inline-link">Browse all properties</a>
+          </div>
+
+          <div class="property-grid">
+            <article class="property-card">
+              <div class="property-image image-one">
+                <span class="badge">Featured</span>
+                <button class="save-btn" aria-label="Save listing">♥</button>
+              </div>
+              <div class="property-content">
+                <div class="price-row">
+                  <h3>GH₵ 1,240,000</h3>
+                  <span class="status">For Sale</span>
+                </div>
+                <p class="address">245 Ocean View Drive, Accra</p>
+                <div class="stats">
+                  <span>3 Beds</span>
+                  <span>2 Baths</span>
+                  <span>2,150 Sq Ft</span>
+                </div>
+                <button class="text-btn view-details" data-house="accra-villa">View Details</button>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-image image-two">
+                <span class="badge">New</span>
+                <button class="save-btn" aria-label="Save listing">♥</button>
+              </div>
+              <div class="property-content">
+                <div class="price-row">
+                  <h3>GH₵ 860,000</h3>
+                  <span class="status">For Sale</span>
+                </div>
+                <p class="address">18 Cedar Grove Lane, Kumasi</p>
+                <div class="stats">
+                  <span>4 Beds</span>
+                  <span>3 Baths</span>
+                  <span>2,640 Sq Ft</span>
+                </div>
+                <button class="text-btn view-details" data-house="kumasi-home">View Details</button>
+              </div>
+            </article>
+
+            <article class="property-card">
+              <div class="property-image image-three">
+                <span class="badge hot">Hot Deal</span>
+                <button class="save-btn" aria-label="Save listing">♥</button>
+              </div>
+              <div class="property-content">
+                <div class="price-row">
+                  <h3>GH₵ 2,980 / mo</h3>
+                  <span class="status rent">For Rent</span>
+                </div>
+                <p class="address">771 Park Avenue, Tema</p>
+                <div class="stats">
+                  <span>2 Beds</span>
+                  <span>2 Baths</span>
+                  <span>1,420 Sq Ft</span>
+                </div>
+                <button class="text-btn view-details" data-house="tema-apartment">View Details</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="property-detail-panel" id="property-detail-panel" hidden>
+            <div class="detail-shell">
+              <button type="button" class="detail-close" aria-label="Close property details">×</button>
+
+              <div class="detail-gallery">
+                <button type="button" class="gallery-nav gallery-prev" aria-label="Previous image">←</button>
+                <div class="gallery-frame">
+                  <img id="detail-image" src="" alt="Property gallery view" />
+                </div>
+                <button type="button" class="gallery-nav gallery-next" aria-label="Next image">→</button>
+              </div>
+
+              <div class="detail-content">
+                <span class="detail-status" id="detail-status">For Sale</span>
+                <h3 id="detail-title">Property Name</h3>
+                <p class="detail-address" id="detail-address">Address</p>
+                <div class="detail-price-row">
+                  <strong id="detail-price">GH₵ 0</strong>
+                  <span id="detail-meta">3 Beds • 2 Baths</span>
+                </div>
+                <p class="detail-description" id="detail-description">
+                  Elegant property description.
+                </p>
+                <div class="room-highlight-box">
+                  <h4>Home Highlights</h4>
+                  <ul class="detail-room-highlights" id="detail-room-highlights"></ul>
+                </div>
+                <ul class="detail-specs" id="detail-specs"></ul>
+
+                <div class="booking-box">
+                  <h4>Book and pay</h4>
+                  <form class="purchase-form" id="purchase-form">
+                    <div class="purchase-form-grid">
+                      <label>
+                        <span>Full name</span>
+                        <input type="text" name="buyerName" placeholder="Your full name" required />
+                      </label>
+                      <label>
+                        <span>Email</span>
+                        <input type="email" name="buyerEmail" placeholder="you@example.com" required />
+                      </label>
+                    </div>
+
+                    <div class="purchase-form-grid">
+                      <label>
+                        <span>Phone</span>
+                        <input type="tel" name="buyerPhone" placeholder="+233 24 000 0000" required />
+                      </label>
+                      <label>
+                        <span>Payment plan</span>
+                        <select name="paymentPlan" class="payment-plan">
+                          <option value="Full payment">Full payment</option>
+                          <option value="25% deposit">25% deposit</option>
+                          <option value="Installment plan">Installment plan</option>
+                        </select>
+                      </label>
+                    </div>
+
+                    <div class="payment-summary">
+                      <span>Property price</span>
+                      <strong class="checkout-price">GH₵ 0</strong>
+                    </div>
+
+                    <label>
+                      <span>Deposit amount</span>
+                      <input type="number" name="depositAmount" class="payment-amount" min="1" value="1" required />
+                    </label>
+
+                    <div class="card-box">
+                      <label>
+                        <span>Card number</span>
+                        <input type="text" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" required />
+                      </label>
+                      <div class="card-row">
+                        <label>
+                          <span>Expiry</span>
+                          <input type="text" name="cardExpiry" placeholder="MM/YY" maxlength="5" required />
+                        </label>
+                        <label>
+                          <span>CVV</span>
+                          <input type="text" name="cardCvv" placeholder="123" maxlength="4" inputmode="numeric" required />
+                        </label>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="primary-btn">Continue to secure payment</button>
+                    <p class="purchase-status" aria-live="polite"></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section values-section" id="about">
+        <div class="container">
+          <div class="section-heading center">
+            <p class="eyebrow accent">Why clients choose us</p>
+            <h2>We make big property decisions feel clear and reassuring.</h2>
+            <p class="section-intro">
+              Buying, selling, or renting a home is one of life’s biggest decisions. We keep it simple,
+              honest, and personal—so you always know what matters and what to do next.
+            </p>
+          </div>
+
+          <div class="value-grid">
+            <div class="value-card">
+              <div class="icon">01</div>
+              <h3>We listen before we sell</h3>
+              <p>
+                Whether you want more space, a better investment, or a home that fits your lifestyle,
+                we start by understanding what truly matters to you.
+              </p>
+            </div>
+            <div class="value-card">
+              <div class="icon">02</div>
+              <h3>We guide you every step</h3>
+              <p>
+                Buying or selling a home can feel stressful, especially when money, timing, and long-term
+                plans are involved. We explain each step clearly, keep things honest, and help you make
+                confident decisions without the confusion.
+              </p>
+            </div>
+            <div class="value-card">
+              <div class="icon">03</div>
+              <h3>We help you get real results</h3>
+              <p>
+                We focus on what truly matters: better opportunities for buyers and stronger visibility for
+                sellers. Our approach helps people move forward with clarity, confidence, and a better
+                chance of getting the right outcome.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section testimonials">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow accent">Testimonials</p>
+              <h2>Clients trust us to move boldly across Ghana.</h2>
+            </div>
+          </div>
+
+          <div class="testimonial-grid">
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                “Apex Living made our home search effortless. They understood exactly what we wanted,
+                and their negotiation strategy was exceptional.”
+              </p>
+              <div class="person">
+                <strong>Marina S.</strong>
+                <span>Buyer, East Legon</span>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                “Their marketing package exceeded expectations. We sold above asking price in under two
+                weeks and felt fully supported the entire time.”
+              </p>
+              <div class="person">
+                <strong>Daniel K.</strong>
+                <span>Seller, Kumasi</span>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>
+                “As renters, we needed a fast and thoughtful process. They matched us with a beautiful home
+                and took care of every detail.”
+              </p>
+              <div class="person">
+                <strong>Rosa & Leo</strong>
+                <span>Renters, Tema</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="consultation">
+        <div class="container cta-box">
+          <div>
+            <p class="eyebrow accent">Let’s get started</p>
+            <h2>Book a free strategy call with our Ghana property advisors.</h2>
+            <p class="cta-copy">
+              Tell us what kind of home or investment you are looking for, and we’ll guide you with clear
+              advice, honest market insight, and a plan that fits your goals.
+            </p>
+          </div>
+          <form class="cta-form">
+            <input type="text" placeholder="Your name" aria-label="Your name" />
+            <input type="email" placeholder="Email address" aria-label="Email address" />
+            <input type="tel" placeholder="Phone number" aria-label="Phone number" />
+            <button class="primary-btn" type="submit">Request a Call</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand" href="#" aria-label="Apex Living home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="apex-brand-gradient-footer" x1="0%" x2="100%" y1="0%" y2="100%">
+                    <stop offset="0%" stop-color="#f4dfb8" />
+                    <stop offset="100%" stop-color="#c9a66b" />
+                  </linearGradient>
+                </defs>
+                <rect x="5" y="5" width="54" height="54" rx="16" fill="#0f172a" />
+                <path d="M18 35L32 20L46 35" fill="none" stroke="url(#apex-brand-gradient-footer)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 32V46H42V32" fill="none" stroke="url(#apex-brand-gradient-footer)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M28 46V34H36V46" fill="none" stroke="url(#apex-brand-gradient-footer)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>Apex Living</span>
+          </a>
+          <p>
+            Premium real estate advisory for buyers, sellers, and renters seeking a more confident move across Ghana.
+          </p>
+        </div>
+
+        <div>
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="#">Properties</a></li>
+            <li><a href="#">Neighborhoods</a></li>
+            <li><a href="#">Agents</a></li>
+            <li><a href="#">Market Insights</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Get in touch</h3>
+          <ul>
+            <li><a href="tel:+233209755466">+233 209755466</a></li>
+            <li><a href="mailto:hello@apexliving.com.gh">hello@apexliving.com.gh</a></li>
+            <li>Tema, Community 9</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> Apex Living</span>
+        <span>All rights reserved</span>
+      </div>
+    </footer>
+
+    <a
+      class="whatsapp-float"
+      href="https://wa.me/233209755466?text=Hello%20Apex%20Living"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat on WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path
+          d="M20.52 3.48A11.86 11.86 0 0 0 12.03 0C5.55 0 .22 5.33.22 11.81c0 2.08.54 4.11 1.56 5.9L0 24l6.48-1.7A11.8 11.8 0 0 0 12.03 24c6.48 0 11.81-5.33 11.81-11.81 0-3.16-1.23-6.14-3.32-8.71Zm-8.49 18.12h-.01a9.84 9.84 0 0 1-5.02-1.38l-.36-.21-3.84 1.01 1.03-3.75-.24-.38A9.75 9.75 0 0 1 2.1 11.8 9.92 9.92 0 1 1 12.03 21.6Zm5.42-7.4c-.3-.15-1.77-.87-2.05-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.23-.65.08-.3-.15-1.27-.47-2.42-1.49-.89-.79-1.49-1.77-1.67-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.03-.52-.08-.15-.68-1.64-.94-2.24-.25-.59-.51-.51-.68-.52l-.58-.01c-.2 0-.52.07-.79.38-.27.3-1.03 1.01-1.03 2.46 0 1.45 1.06 2.85 1.21 3.05.15.2 2.08 3.18 5.04 4.46.7.3 1.25.48 1.68.62.71.22 1.35.19 1.86.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.31.18-1.43-.07-.12-.27-.2-.57-.35Z"
+        />
+      </svg>
+    </a>
+
+    <script src="script.js"></script>
+  </body>
+</html>
