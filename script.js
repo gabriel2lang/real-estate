@@ -43,7 +43,7 @@ function toggleResetPanel(show) {
   }
 
   if (resetCodeBox) {
-    resetCodeBox.hidden = true;
+    resetCodeBox.hidden = !show;
   }
 
   if (status) {
@@ -105,7 +105,7 @@ function attachForgotPasswordFlow() {
         if (contactInput) contactInput.value = '';
         const codeInput = document.getElementById('reset-code-input');
         if (codeInput) codeInput.value = '';
-        if (resetCodeBox) resetCodeBox.hidden = true;
+        if (resetCodeBox) resetCodeBox.hidden = false;
         showResetStatus('');
       }
     });
@@ -125,7 +125,7 @@ function attachForgotPasswordFlow() {
       sessionStorage.setItem('harborResetCode', code);
       sessionStorage.setItem('harborResetContact', contact);
       if (resetCodeBox) resetCodeBox.hidden = false;
-      showResetStatus(`A 6-digit reset code has been sent to ${contact}. Use code: ${code}`);
+      showResetStatus(`A 6-digit reset code has been sent by SMS or WhatsApp to ${contact}. Demo code: ${code}`);
     });
   }
 
