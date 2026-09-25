@@ -195,8 +195,7 @@ button {
 .primary-btn:hover,
 .secondary-btn:hover,
 .text-btn:hover,
-.tab:hover,
-.save-btn:hover {
+.tab:hover {
   transform: translateY(-1px);
 }
 
@@ -530,17 +529,6 @@ button {
 .badge.hot {
   background: rgba(201, 166, 107, 0.18);
   color: #7c5b1b;
-}
-
-.save-btn {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
-  color: var(--navy-900);
 }
 
 .property-content {

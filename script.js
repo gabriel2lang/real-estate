@@ -463,7 +463,6 @@ function renderPropertyListings() {
         <article class="property-card">
           <div class="property-image" style="background-image: url('${property.image}')">
             <span class="badge ${property.label === 'Hot Deal' ? 'hot' : ''}">${property.label}</span>
-            <button class="save-btn" aria-label="Save listing">♥</button>
           </div>
           <div class="property-content">
             <div class="price-row">
